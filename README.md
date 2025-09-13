@@ -4,16 +4,16 @@ A Chrome extension that generates intelligent AI replies for Discord messages us
 
 ![Dobby AI Logo](dobby.png)
 
-## ✨ Features
+## Features
 
-- **🎯 Smart Message Locking**: Ctrl+Click or Right-Click to lock any Discord message
-- **🤖 AI-Powered Replies**: Generate 3 different contextual responses using Dobby 8B
-- **🎨 Discord-Native UI**: Seamlessly integrated dropdown in Discord's top-right corner
-- **🔄 Regenerate Options**: Get fresh replies with the regenerate button
-- **📋 One-Click Copy**: Copy any reply to clipboard instantly
-- **🎮 Draggable Interface**: Move the reply dropdown anywhere on screen
-- **⚡ Real-Time Generation**: Fast, human-like responses without emojis
-- **🔧 Easy Setup**: Simple configuration with Fireworks AI API key
+- **Smart Message Locking**: Ctrl+Click or Right-Click to lock any Discord message
+- **AI-Powered Replies**: Generate 3 different contextual responses using Dobby 8B
+- **Discord-Native UI**: Seamlessly integrated dropdown in Discord's top-right corner
+- **Regenerate Options**: Get fresh replies with the regenerate button
+- **One-Click Copy**: Copy any reply to clipboard instantly
+- **Draggable Interface**: Move the reply dropdown anywhere on screen
+- **Real-Time Generation**: Fast, human-like responses without emojis
+- **Easy Setup**: Simple configuration with Fireworks AI API key
 
 ## 🚀 Quick Start
 
@@ -114,39 +114,6 @@ dobby-ai-discord/
 └── 📖 README.md              # This documentation
 ```
 
-## 🔧 Development
-
-### Local Development Setup
-
-1. **Download & Setup**
-   - Go to GitHub repository and click **"Code" → "Download ZIP"**
-   - **Extract the ZIP file** to a folder on your computer
-   - You should see the project files (manifest.json, content.js, etc.)
-
-2. **Load Extension**
-   - Open `chrome://extensions/`
-   - Enable "Developer mode"
-   - Click "Load unpacked" → select **unpacked project folder**
-
-3. **Make Changes**
-   - Edit files as needed
-   - Click "Reload" button on extension
-   - Test on Discord.com
-
-4. **Debug**
-   - Right-click extension icon → "Inspect popup"
-   - Open Discord → F12 → Console tab
-   - Check for error messages
-
-### Key Functions
-
-| Function | File | Purpose |
-|----------|------|---------|
-| `lockToMessage()` | content.js | Locks a message for reply generation |
-| `generateMultipleReplies()` | content.js | Creates 3 AI responses |
-| `showReplyPreview()` | content.js | Displays reply dropdown UI |
-| `generateReply()` | background.js | Calls Fireworks AI API |
-| `loadConfig()` | popup.js | Loads user settings |
 
 ## 🐛 Troubleshooting
 
@@ -190,74 +157,12 @@ dobby-ai-discord/
 | `scripting` | Inject content scripts into Discord |
 | `host_permissions` | Access Discord.com domains |
 
-## 🤝 Contributing
-
-We welcome contributions! Here's how to help:
-
-1. **Fork the Repository**
-   ```bash
-   git fork https://github.com/yourusername/dobby-ai-discord
-   ```
-
-2. **Create Feature Branch**
-   ```bash
-   git checkout -b feature/amazing-feature
-   ```
-
-3. **Make Changes**
-   - Follow existing code style
-   - Add comments for complex logic
-   - Test thoroughly on Discord
-
-4. **Submit Pull Request**
-   - Describe your changes
-   - Include screenshots if UI changes
-   - Reference any related issues
-
-### Development Guidelines
-
-- **Code Style**: Use existing patterns and formatting
-- **Testing**: Test on multiple Discord message types
-- **Documentation**: Update README for new features
-- **Performance**: Keep API calls minimal and efficient
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🙏 Acknowledgments
-
-- **Fireworks AI** for providing the Dobby 8B model
-- **Discord** for the amazing platform
-- **Open Source Community** for inspiration and tools
-
 ## 📞 Support
 
 Need help? Here's where to get support:
 
-- **🐛 Bug Reports**: [GitHub Issues](https://github.com/yourusername/dobby-ai-discord/issues)
-- **💡 Feature Requests**: [GitHub Discussions](https://github.com/yourusername/dobby-ai-discord/discussions)
-- **📧 Contact**: [Your Email](mailto:your-email@example.com)
-
-## 🔄 Changelog
-
-### Version 1.0.0 (Current)
-- ✅ Initial release with core functionality
-- ✅ Message locking with Ctrl+Click/Right-Click
-- ✅ AI reply generation with Dobby 8B model
-- ✅ Discord-native UI integration
-- ✅ Copy-to-clipboard functionality
-- ✅ Regenerate button for fresh replies
-- ✅ Draggable dropdown interface
-- ✅ Fireworks AI API integration
-
-### Planned Features
-- 🔄 Multiple AI model support
-- 🎨 Custom reply templates
-- 📊 Usage analytics
-- 🌍 Multi-language support
-- ⚡ Keyboard shortcuts
-- 🎯 Smart reply filtering
+- **🐛 Bug Reports**: [GitHub Issues](https://github.com/AbbyTheGod/dobby-discord-extension/issues)
+- **💡 Feature Requests**: [GitHub Discussions](https://github.com/AbbyTheGod/dobby-discord-extension/discussions)
 
 ---
 
@@ -265,6 +170,6 @@ Need help? Here's where to get support:
 
 **Made with ❤️ for the Discord community**
 
-[⭐ Star this repo](https://github.com/yourusername/dobby-ai-discord) | [🐛 Report Bug](https://github.com/yourusername/dobby-ai-discord/issues) | [💡 Request Feature](https://github.com/yourusername/dobby-ai-discord/discussions)
+[⭐ Star this repo](https://github.com/AbbyTheGod/dobby-discord-extension) | [🐛 Report Bug](https://github.com/AbbyTheGod/dobby-discord-extension/issues) | [💡 Request Feature](https://github.com/AbbyTheGod/dobby-discord-extension/discussions)
 
 </div>
