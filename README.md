@@ -6,7 +6,7 @@ A Chrome extension that generates intelligent AI replies for Discord messages us
 
 ## Features
 
-- **Smart Message Locking**: Ctrl+Click or Right-Click to lock any Discord message
+- **Smart Message Locking**: Ctrl+Click to lock any Discord message
 - **AI-Powered Replies**: Generate 3 different contextual responses using Dobby 8B
 - **Discord-Native UI**: Seamlessly integrated dropdown in Discord's top-right corner
 - **Regenerate Options**: Get fresh replies with the regenerate button
@@ -44,7 +44,7 @@ A Chrome extension that generates intelligent AI replies for Discord messages us
 ### Usage
 
 1. **Lock a Message**
-   - **Ctrl+Click** or **Right-Click** on any Discord message
+   - **Ctrl+Click** on any Discord message
    - Blue border appears around the locked message
    - "🔒 Locked to this message" notification shows
 
