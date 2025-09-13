@@ -1,19 +1,19 @@
 # Dobby AI - Discord Reply Assistant
 
-A Chrome extension that generates intelligent AI replies for Discord messages using Fireworks AI and the Dobby 8B model. Simply lock a message and get 3 contextual reply suggestions!
+A Chrome extension that generates intelligent AI replies for Discord messages using Fireworks API and the Dobby Unhinged 8B model. Simply lock a message and get 3 contextual reply suggestions!
 
 ![Dobby AI Logo](dobby.png)
 
 ## Features
 
 - **Smart Message Locking**: Ctrl+Click to lock any Discord message
-- **AI-Powered Replies**: Generate 3 different contextual responses using Dobby 8B
+- **AI-Powered Replies**: Generate 3 different contextual responses using Dobby Unhinged 8B
 - **Discord-Native UI**: Seamlessly integrated dropdown in Discord's top-right corner
 - **Regenerate Options**: Get fresh replies with the regenerate button
 - **One-Click Copy**: Copy any reply to clipboard instantly
 - **Draggable Interface**: Move the reply dropdown anywhere on screen
 - **Real-Time Generation**: Fast, human-like responses without emojis
-- **Easy Setup**: Simple configuration with Fireworks AI API key
+- **Easy Setup**: Simple configuration with Fireworks API key
 
 ## 🚀 Quick Start
 
@@ -31,7 +31,7 @@ A Chrome extension that generates intelligent AI replies for Discord messages us
    - Dobby AI icon appears in your toolbar
 
 3. **Get API Key**
-   - Visit [Fireworks AI](https://app.fireworks.ai/)
+   - Visit [Fireworks API](https://app.fireworks.ai/)
    - Create account and get your API key
    - Keys start with `fw`
 
@@ -43,22 +43,18 @@ A Chrome extension that generates intelligent AI replies for Discord messages us
 
 ### Usage
 
-1. **Lock a Message**
+1. **Lock a Message and Generate Replies**
    - **Ctrl+Click** on any Discord message
    - Blue border appears around the locked message
-   - "🔒 Locked to this message" notification shows
-
-2. **Generate Replies**
-   - Hover over the locked message
-   - AI generates 3 different reply options
+   - AI automatically generates 3 different reply options
    - Dropdown appears in top-right corner
 
-3. **Use Replies**
+2. **Use Replies**
    - Click "Copy Reply" next to any response you like
    - Paste with **Ctrl+V** in Discord's message input
    - Press **Enter** to send normally
 
-4. **Regenerate (Optional)**
+3. **Regenerate (Optional)**
    - Click "🔄 Regenerate" for fresh reply options
    - Get different responses for the same message
 
@@ -69,7 +65,7 @@ A Chrome extension that generates intelligent AI replies for Discord messages us
 | Setting | Description | Default |
 |---------|-------------|---------|
 | **Hover Reply Enabled** | Master toggle for the extension | OFF |
-| **Fireworks API Key** | Your API key from Fireworks AI | Required |
+| **Fireworks API Key** | Your API key from Fireworks API | Required |
 | **Test Connection** | Verify API key works | Manual |
 
 ### AI Model Settings
@@ -87,7 +83,7 @@ A Chrome extension that generates intelligent AI replies for Discord messages us
 │                 │◄──►│   (content.js)   │◄──►│ (background.js) │
 │  - Message DOM  │    │                  │    │                 │
 │  - UI Injection │    │  - Hover Events  │    │  - API Calls    │
-│  - User Input   │    │  - Reply Display │    │  - Fireworks AI │
+│  - User Input   │    │  - Reply Display │    │  - Fireworks API │
 └─────────────────┘    └──────────────────┘    └─────────────────┘
                                 ▲
                                 │
@@ -122,7 +118,7 @@ dobby-ai-discord/
 | Problem | Solution |
 |---------|----------|
 | **Extension not working** | Check if enabled in `chrome://extensions/` |
-| **No replies generated** | Verify API key and credits at Fireworks AI |
+| **No replies generated** | Verify API key and credits at Fireworks API |
 | **UI not appearing** | Refresh Discord page, check console errors |
 | **Can't copy replies** | Ensure clipboard permissions are granted |
 
