@@ -8,6 +8,9 @@ class DiscordHoverBot {
     this.replyPreview = null;
     this.lockedChat = null;
     this.lockedMessage = null;
+    this.messageObserver = null;
+    this.observerTimeout = null;
+    this.eventListeners = new Set(); // Track event listeners for cleanup
     this.init();
   }
 
@@ -162,10 +165,13 @@ class DiscordHoverBot {
     if (!element.hasAttribute('data-hover-bot-added')) {
       element.setAttribute('data-hover-bot-added', 'true');
       
+      // Add tooltip to show Ctrl+Click instruction
+      element.setAttribute('title', 'Ctrl+Click to lock this message and generate AI replies');
+      
       console.log('Added hover listener to message element');
       
       // Use mouseover instead of mouseenter for better detection
-      element.addEventListener('mouseover', (e) => {
+      const mouseoverHandler = (e) => {
         console.log('Mouse over detected on:', element);
         // Only process if this is the locked message
         if (this.lockedMessage === element) {
@@ -174,11 +180,18 @@ class DiscordHoverBot {
           console.log('Not locked message, just setting as hovered');
           this.hoveredMessage = element;
         }
-      }, { passive: true });
+      };
       
-      element.addEventListener('mouseout', (e) => {
+      const mouseoutHandler = (e) => {
         this.handleMessageLeave(e, element);
-      }, { passive: true });
+      };
+      
+      element.addEventListener('mouseover', mouseoverHandler, { passive: true });
+      element.addEventListener('mouseout', mouseoutHandler, { passive: true });
+      
+      // Track event listeners for cleanup
+      this.eventListeners.add({ element, event: 'mouseover', handler: mouseoverHandler });
+      this.eventListeners.add({ element, event: 'mouseout', handler: mouseoutHandler });
     }
   }
 
@@ -1407,6 +1420,12 @@ class DiscordHoverBot {
           message: prompt,
           config: config
         }, (response) => {
+          if (chrome.runtime.lastError) {
+            console.error('Runtime error:', chrome.runtime.lastError);
+            resolve(null);
+            return;
+          }
+          
           if (response && response.success) {
             resolve(response.reply);
           } else {
@@ -1431,6 +1450,12 @@ class DiscordHoverBot {
           message: messageContent,
           config: config
         }, (response) => {
+          if (chrome.runtime.lastError) {
+            console.error('Runtime error:', chrome.runtime.lastError);
+            resolve(null);
+            return;
+          }
+          
           if (response && response.success) {
             resolve(response.reply);
           } else {
@@ -1449,6 +1474,40 @@ class DiscordHoverBot {
 
   delay(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  // Cleanup method to prevent memory leaks
+  cleanup() {
+    console.log('Cleaning up DiscordHoverBot...');
+    
+    // Clear timeouts
+    if (this.observerTimeout) {
+      clearTimeout(this.observerTimeout);
+      this.observerTimeout = null;
+    }
+    
+    // Disconnect observer
+    if (this.messageObserver) {
+      this.messageObserver.disconnect();
+      this.messageObserver = null;
+    }
+    
+    // Remove event listeners
+    this.eventListeners.forEach(listener => {
+      if (listener.element && listener.event && listener.handler) {
+        listener.element.removeEventListener(listener.event, listener.handler);
+      }
+    });
+    this.eventListeners.clear();
+    
+    // Hide any active previews
+    this.hideReplyPreview();
+    
+    // Clear references
+    this.hoveredMessage = null;
+    this.lockedChat = null;
+    this.lockedMessage = null;
+    this.replyPreview = null;
   }
 }
 

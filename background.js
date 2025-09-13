@@ -5,22 +5,41 @@ console.log('Dobby AI: Background script loaded');
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   console.log('Background received message:', request);
 
+  // Validate request structure
+  if (!request || !request.action) {
+    sendResponse({ success: false, error: 'Invalid request format' });
+    return;
+  }
+
   switch (request.action) {
     case 'testConnection':
+      if (!request.config || !request.config.fireworksApiKey) {
+        sendResponse({ success: false, error: 'Missing API key configuration' });
+        return;
+      }
       testConnection(request.config)
         .then(result => sendResponse(result))
-        .catch(error => sendResponse({ success: false, error: error.message }));
+        .catch(error => {
+          console.error('Test connection error:', error);
+          sendResponse({ success: false, error: error.message || 'Connection test failed' });
+        });
       return true; // Keep message channel open for async response
 
     case 'generateReply':
+      if (!request.message || !request.config || !request.config.fireworksApiKey) {
+        sendResponse({ success: false, error: 'Missing message or API key configuration' });
+        return;
+      }
       generateReply(request.message, request.config)
         .then(result => sendResponse(result))
-        .catch(error => sendResponse({ success: false, error: error.message }));
+        .catch(error => {
+          console.error('Generate reply error:', error);
+          sendResponse({ success: false, error: error.message || 'Reply generation failed' });
+        });
       return true;
 
-
     default:
-      sendResponse({ success: false, error: 'Unknown action' });
+      sendResponse({ success: false, error: 'Unknown action: ' + request.action });
   }
 });
 
@@ -28,6 +47,10 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 async function testConnection(config) {
   try {
     console.log('Dobby AI: Testing Fireworks API connection...');
+    
+    // Add timeout to prevent hanging requests
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
     
     const response = await fetch('https://api.fireworks.ai/inference/v1/chat/completions', {
       method: 'POST',
@@ -45,8 +68,11 @@ async function testConnection(config) {
         ],
         max_tokens: 25,
         temperature: 0.7
-      })
+      }),
+      signal: controller.signal
     });
+    
+    clearTimeout(timeoutId);
 
     if (!response.ok) {
       const errorText = await response.text();
@@ -69,9 +95,23 @@ async function testConnection(config) {
 
   } catch (error) {
     console.error('Connection test failed:', error);
+    
+    // Handle specific error types
+    if (error.name === 'AbortError') {
+      return { 
+        success: false, 
+        error: 'Connection timeout - please check your internet connection' 
+      };
+    } else if (error.message.includes('Failed to fetch')) {
+      return { 
+        success: false, 
+        error: 'Network error - please check your internet connection' 
+      };
+    }
+    
     return { 
       success: false, 
-      error: error.message 
+      error: error.message || 'Connection test failed' 
     };
   }
 }
@@ -81,7 +121,11 @@ async function generateReply(messageContent, config) {
   try {
     console.log('Dobby AI: Generating reply for message:', messageContent);
     
-            const prompt = messageContent;
+    const prompt = messageContent;
+    
+    // Add timeout to prevent hanging requests
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 15000); // 15 second timeout for generation
     
     const response = await fetch('https://api.fireworks.ai/inference/v1/chat/completions', {
       method: 'POST',
@@ -102,8 +146,11 @@ async function generateReply(messageContent, config) {
         top_p: 0.95,
         frequency_penalty: 0.3,
         presence_penalty: 0.2
-      })
+      }),
+      signal: controller.signal
     });
+    
+    clearTimeout(timeoutId);
 
     if (!response.ok) {
       const errorText = await response.text();
@@ -122,7 +169,24 @@ async function generateReply(messageContent, config) {
 
   } catch (error) {
     console.error('Error generating reply:', error);
-    return { success: false, error: error.message };
+    
+    // Handle specific error types
+    if (error.name === 'AbortError') {
+      return { 
+        success: false, 
+        error: 'Reply generation timeout - please try again' 
+      };
+    } else if (error.message.includes('Failed to fetch')) {
+      return { 
+        success: false, 
+        error: 'Network error - please check your internet connection' 
+      };
+    }
+    
+    return { 
+      success: false, 
+      error: error.message || 'Reply generation failed' 
+    };
   }
 }
 

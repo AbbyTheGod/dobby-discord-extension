@@ -45,7 +45,7 @@
   },
   "web_accessible_resources": [
     {
-      "resources": ["dobby.png", "senti.png", "icons8.png"],
+      "resources": ["dobby.png", "icons8.png"],
       "matches": ["<all_urls>"]
     }
   ]

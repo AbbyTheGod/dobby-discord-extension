@@ -158,7 +158,7 @@ dobby-ai-discord/
 Need help? Here's where to get support:
 
 - **🐛 Bug Reports**: [GitHub Issues](https://github.com/AbbyTheGod/dobby-discord-extension/issues)
-- **💡 Feature Requests**: [GitHub Discussions](https://github.com/AbbyTheGod/dobby-discord-extension/discussions)
+- **💡 Feature Requests**: [GitHub Issues](https://github.com/AbbyTheGod/dobby-discord-extension/issues)
 
 ---
 
@@ -166,6 +166,6 @@ Need help? Here's where to get support:
 
 **Made with ❤️ for the Discord community**
 
-[⭐ Star this repo](https://github.com/AbbyTheGod/dobby-discord-extension) | [🐛 Report Bug](https://github.com/AbbyTheGod/dobby-discord-extension/issues) | [💡 Request Feature](https://github.com/AbbyTheGod/dobby-discord-extension/discussions)
+[⭐ Star this repo](https://github.com/AbbyTheGod/dobby-discord-extension) | [🐛 Report Bug](https://github.com/AbbyTheGod/dobby-discord-extension/issues) | [💡 Request Feature](https://github.com/AbbyTheGod/dobby-discord-extension/issues)
 
 </div>

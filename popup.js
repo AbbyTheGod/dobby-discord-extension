@@ -105,6 +105,12 @@ document.addEventListener('DOMContentLoaded', function() {
       testConnection.textContent = originalText;
       testConnection.disabled = false;
       
+      if (chrome.runtime.lastError) {
+        console.error('Runtime error:', chrome.runtime.lastError);
+        showStatus('❌ Extension communication error: ' + chrome.runtime.lastError.message, 'error');
+        return;
+      }
+      
       if (response && response.success) {
         showStatus('🎉 Connection test successful!', 'success');
       } else {
@@ -118,13 +124,23 @@ document.addEventListener('DOMContentLoaded', function() {
       'fireworksApiKey',
       'botEnabled'
     ], function(result) {
-      if (result.fireworksApiKey) fireworksApiKey.value = result.fireworksApiKey;
-      if (result.botEnabled) toggleBot.classList.add('active');
+      try {
+        if (result.fireworksApiKey) fireworksApiKey.value = result.fireworksApiKey;
+        if (result.botEnabled) toggleBot.classList.add('active');
+      } catch (error) {
+        console.error('Error loading config:', error);
+        showStatus('Error loading configuration', 'error');
+      }
     });
   }
 
   function saveConfigToStorage(config) {
-    chrome.storage.sync.set(config);
+    chrome.storage.sync.set(config, function() {
+      if (chrome.runtime.lastError) {
+        console.error('Error saving config:', chrome.runtime.lastError);
+        showStatus('Error saving configuration', 'error');
+      }
+    });
   }
 
   function showStatus(message, type) {
