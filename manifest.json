@@ -1,0 +1,52 @@
+{
+  "manifest_version": 3,
+  "name": "Dobby AI",
+  "version": "1.0.0",
+  "description": "A Chrome extension that generates AI replies when you hover over Discord messages using Fireworks AI and Dobby 8B model",
+  "permissions": [
+    "activeTab",
+    "storage",
+    "scripting"
+  ],
+  "host_permissions": [
+    "https://discord.com/*",
+    "https://*.discord.com/*",
+    "https://api.fireworks.ai/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://discord.com/*", "https://*.discord.com/*"],
+      "js": ["content.js"],
+      "run_at": "document_end"
+    }
+  ],
+  "icons": {
+    "16": "icons8.png",
+    "32": "icons8.png",
+    "48": "icons8.png",
+    "80": "icons8.png",
+    "128": "icons8.png",
+    "256": "icons8.png"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Dobby AI",
+    "default_icon": {
+      "16": "icons8.png",
+      "32": "icons8.png",
+      "48": "icons8.png",
+      "80": "icons8.png",
+      "128": "icons8.png",
+      "256": "icons8.png"
+    }
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["dobby.png", "senti.png", "icons8.png"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}
